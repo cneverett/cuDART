@@ -274,7 +274,8 @@ __device__ float MeshBlock::calc_trace(const Ray &r, TraceArgs trace_args) {
                 float midpoint_s = s_current + 0.5 * dwell;
                 trace_weight *= calc_lookback_factor(midpoint_s, trace_args);
             }
-            trace += trace_weight * all_data[data_index];    
+            trace += trace_weight * all_data[data_index]; 
+            trace = fmaxf(trace,0.0f);
             
             // update position of ray head
             s_current = s_next_intercept[axis]; // += dwell
